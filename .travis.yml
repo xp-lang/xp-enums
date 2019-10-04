@@ -1,0 +1,27 @@
+# xp-lang/php-is-operator
+
+language: php
+
+dist: trusty
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4snapshot
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+before_script:
+  - curl -sSL https://dl.bintray.com/xp-runners/generic/xp-run-8.1.7.sh > xp-run
+  - composer install --prefer-dist
+  - echo "vendor/autoload.php" > composer.pth
+  - echo "vendor/xp-framework/compiler/src/test/php" >> composer.pth
+
+script:
+  - sh xp-run xp.unittest.TestRunner src/test/php

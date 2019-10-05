@@ -48,7 +48,7 @@ class EnumsTest extends EmittingTest {
 
   #[@test]
   public function os_enum() {
-    $t= $this->type('enum <T> {
+    $t= $this->type('abstract enum <T> {
       WIN {
         public function root() { return "C:"; }
       },

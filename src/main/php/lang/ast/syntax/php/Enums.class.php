@@ -103,13 +103,11 @@ class Enums implements Extension {
 
       // Create static intializer and properties
       $init= clone $static;
-      $abstract= false;
       foreach ($node->members->all() as $name => $member) {
         $body[]= new Property(['public', 'static'], $name, null);
         $args= [new Literal($member[0]), new Literal("'".$name."'")];
 
         if ($member[1]) {
-          $abstract= true;
           $child= ['__static()' => clone $static] + $member[1];
           $member= new NewClassExpression(new ClassDeclaration([], null, $node->name, [], $child), $args);
         } else {
@@ -120,7 +118,7 @@ class Enums implements Extension {
       $body[]= $init;
 
       return new ClassDeclaration(
-        $abstract ? array_merge(['abstract'], $node->modifiers) : $node->modifiers,
+        $node->modifiers,
         $node->name,
         $node->parent ?: '\lang\Enum',
         $node->implements,

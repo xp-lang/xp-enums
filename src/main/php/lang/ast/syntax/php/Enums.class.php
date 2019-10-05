@@ -4,6 +4,7 @@ use lang\ast\nodes\Assignment;
 use lang\ast\nodes\ClassDeclaration;
 use lang\ast\nodes\Literal;
 use lang\ast\nodes\Method;
+use lang\ast\nodes\NewClassExpression;
 use lang\ast\nodes\NewExpression;
 use lang\ast\nodes\Property;
 use lang\ast\nodes\ScopeExpression;
@@ -65,12 +66,21 @@ class Enums implements Extension {
           $ordinal++;
         }
 
+        // Body
+        if ('{' === $parse->token->value) {
+          $parse->forward();
+          $body= $this->typeBody($parse);
+          $parse->expecting('}', 'enum members');
+        } else {
+          $body= [];
+        }
+
         if (',' === $parse->token->value) {
           $parse->forward();
-          $members->add($name, $ordinal);
+          $members->add($name, $ordinal, $body);
           continue;
         } else if (';' === $parse->token->value) {
-          $members->add($name, $ordinal);
+          $members->add($name, $ordinal, $body);
           $parse->forward();
           break;
         } else {
@@ -89,23 +99,28 @@ class Enums implements Extension {
 
     $emitter->transform('enum', function($codegen, $node) {
       $body= $node->body;
+      $static= new Method(['static'], '__static', new Signature([], null), []);
 
       // Create static intializer and properties
-      $init= new Method(['static'], '__static', new Signature([], null));
+      $init= clone $static;
+      $abstract= false;
       foreach ($node->members->all() as $name => $member) {
         $body[]= new Property(['public', 'static'], $name, null);
+        $args= [new Literal($member[0]), new Literal("'".$name."'")];
 
-        // self::$name= new self(0, 'name')
-        $init->body[]= new Assignment(
-          new ScopeExpression('self', new Variable($name)),
-          '=',
-          new NewExpression('self', [new Literal($member[0]), new Literal("'".$name."'")])
-        );
+        if ($member[1]) {
+          $abstract= true;
+          $child= ['__static()' => clone $static] + $member[1];
+          $member= new NewClassExpression(new ClassDeclaration([], null, $node->name, [], $child), $args);
+        } else {
+          $member= new NewExpression('self', $args);
+        }
+        $init->body[]= new Assignment(new ScopeExpression('self', new Variable($name)), '=', $member);
       }
       $body[]= $init;
 
       return new ClassDeclaration(
-        $node->modifiers,
+        $abstract ? array_merge(['abstract'], $node->modifiers) : $node->modifiers,
         $node->name,
         $node->parent ?: '\lang\Enum',
         $node->implements,

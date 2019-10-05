@@ -10,8 +10,8 @@ class EnumMembers extends Node {
     $this->line= $line;
   }
 
-  public function add($name, $ordinal) {
-    $this->members[$name]= [$ordinal];
+  public function add($name, $ordinal, $body) {
+    $this->members[$name]= [$ordinal, $body];
   }
 
   public function all() { return $this->members; }

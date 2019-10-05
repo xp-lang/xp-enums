@@ -112,7 +112,7 @@ class Enums implements Extension {
         $body,
         $node->annotations,
         $node->comment,
-        $node->line,
+        $node->line
       );
     });
   }

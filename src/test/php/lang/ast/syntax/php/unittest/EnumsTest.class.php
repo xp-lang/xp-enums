@@ -45,4 +45,20 @@ class EnumsTest extends EmittingTest {
       $t
     );
   }
+
+  #[@test]
+  public function os_enum() {
+    $t= $this->type('abstract enum <T> {
+      WIN {
+        public function root() { return "C:"; }
+      },
+      UNIX {
+        public function root() { return "/"; }
+      };
+
+      public abstract function root();
+    }');
+
+    $this->assertEquals('C:', Enum::valueOf($t, 'WIN')->root());
+  }
 }

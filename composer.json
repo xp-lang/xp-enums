@@ -7,7 +7,7 @@
   "keywords": ["language", "module", "xp"],
   "require" : {
     "xp-framework/core": "^9.0 | ^8.0 | ^7.0",
-    "xp-framework/compiler": "^4.0",
+    "xp-framework/compiler": "^4.2",
     "php" : ">=5.6.0"
   },
   "require-dev" : {

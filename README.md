@@ -23,12 +23,36 @@ enum Coin {
   penny(1), nickel(2), dime(10), quarter(25);
 }
 
+abstract enum Operation {
+  plus {
+    public function evaluate($x, $y) { return $x + $y; }
+  },
+  minus {
+    public function evaluate($x, $y) { return $x - $y; }
+  },
+  times {
+    public function evaluate($x, $y) { return $x * $y; }
+  },
+  divided_by {
+    public function evaluate($x, $y) { return $x / $y; }
+  };
+
+  public abstract function evaluate($x, $y);
+}
+
+
 // Usage
 $monday= WeekDay::$MON;
 $monday->name();  // "MON"
 
 $dime= Coin::$dime;
 $dime->ordinal(); // 10
+
+$x= 1;
+$y= 3;
+foreach (Enum::valuesOf(Operation::class) as $op) {
+  Console::writeLine($x, ' ', $op->name(), ' ', $y, ' = ', $op->evaluate($x, $y);
+}
 ```
 
 Installation

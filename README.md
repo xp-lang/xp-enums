@@ -71,3 +71,6 @@ No further action is required.
 
 See also
 --------
+* [RFC #0132: Enum support](https://github.com/xp-framework/rfc/issues/132) - implemented July 2007
+* [PHP RFC: Enumerated Types](https://wiki.php.net/rfc/enum) - in draft since 2015
+* [Hack Built In Types: Enumerated Types](https://docs.hhvm.com/hack/built-in-types/enumerated-types)

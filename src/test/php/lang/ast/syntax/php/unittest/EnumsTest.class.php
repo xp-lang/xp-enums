@@ -2,6 +2,7 @@
 
 use lang\Enum;
 use lang\ast\unittest\emit\EmittingTest;
+use unittest\Assert;
 
 class EnumsTest extends EmittingTest {
 
@@ -13,13 +14,13 @@ class EnumsTest extends EmittingTest {
    * @throws unittest.AssertionFailedError
    */
   private function assertEnum($expected, $type) {
-    $this->assertTrue($type->isEnum(), 'type is enum');
+    Assert::true($type->isEnum(), 'type is enum');
 
     $actual= [];
     foreach (Enum::valuesOf($type) as $value) {
       $actual[$value->name()]= $value->ordinal();
     }
-    $this->assertEquals($expected, $actual);
+    Assert::equals($expected, $actual);
   }
 
   #[@test]
@@ -59,6 +60,6 @@ class EnumsTest extends EmittingTest {
       public abstract function root();
     }');
 
-    $this->assertEquals('C:', Enum::valueOf($t, 'WIN')->root());
+    Assert::equals('C:', Enum::valueOf($t, 'WIN')->root());
   }
 }

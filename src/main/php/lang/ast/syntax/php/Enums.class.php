@@ -69,7 +69,7 @@ class Enums implements Extension {
         // Body
         if ('{' === $parse->token->value) {
           $parse->forward();
-          $body= $this->typeBody($parse);
+          $body= $this->typeBody($parse, $name);
           $parse->expecting('}', 'enum members');
         } else {
           $body= [];
@@ -89,7 +89,7 @@ class Enums implements Extension {
       } while (null !== $parse->token->value);
 
       // Type body
-      $body= $this->typeBody($parse);
+      $body= $this->typeBody($parse, $type);
       $parse->expecting('}', 'enum');
 
       $return= new EnumDeclaration([], $type, $parent, $implements, $members, $body, $parse->scope->annotations, $comment, $line);

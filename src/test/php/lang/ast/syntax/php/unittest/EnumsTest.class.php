@@ -2,7 +2,7 @@
 
 use lang\Enum;
 use lang\ast\unittest\emit\EmittingTest;
-use unittest\Assert;
+use unittest\{Assert, Test};
 
 class EnumsTest extends EmittingTest {
 
@@ -23,7 +23,7 @@ class EnumsTest extends EmittingTest {
     Assert::equals($expected, $actual);
   }
 
-  #[@test]
+  #[Test]
   public function weekday_enum() {
     $t= $this->type('enum <T> {
       MON, TUE, WED, THU, FRI, SAT, SUN;
@@ -35,7 +35,7 @@ class EnumsTest extends EmittingTest {
     );
   }
 
-  #[@test]
+  #[Test]
   public function coin_enum() {
     $t= $this->type('enum <T> {
       penny(1), nickel(2), dime(10), quarter(25);
@@ -47,7 +47,7 @@ class EnumsTest extends EmittingTest {
     );
   }
 
-  #[@test]
+  #[Test]
   public function os_enum() {
     $t= $this->type('abstract enum <T> {
       WIN {

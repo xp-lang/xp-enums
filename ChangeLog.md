@@ -3,6 +3,11 @@ XP enums for PHP - ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 1.0.2 / 2020-10-01
+
+* Fixed "Undefined property: lang\ast\Scope::$annotations" warnings
+  (@thekid)
+
 ## 1.0.1 / 2020-05-10
 
 * Merged PR #2: Pass enclosing type to typeBody(), adjusting this

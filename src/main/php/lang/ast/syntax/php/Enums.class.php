@@ -92,7 +92,7 @@ class Enums implements Extension {
       $body= $this->typeBody($parse, $type);
       $parse->expecting('}', 'enum');
 
-      $return= new EnumDeclaration([], $type, $parent, $implements, $members, $body, $parse->scope->annotations, $comment, $line);
+      $return= new EnumDeclaration([], $type, $parent, $implements, $members, $body, [], $comment, $line);
       $parse->scope->annotations= [];
       return $return;
     });

@@ -1,15 +1,6 @@
 <?php namespace lang\ast\syntax\php;
 
-use lang\ast\nodes\Assignment;
-use lang\ast\nodes\ClassDeclaration;
-use lang\ast\nodes\Literal;
-use lang\ast\nodes\Method;
-use lang\ast\nodes\NewClassExpression;
-use lang\ast\nodes\NewExpression;
-use lang\ast\nodes\Property;
-use lang\ast\nodes\ScopeExpression;
-use lang\ast\nodes\Signature;
-use lang\ast\nodes\Variable;
+use lang\ast\nodes\{Assignment, ClassDeclaration, Literal, Method, NewClassExpression, NewExpression, Property, ScopeExpression, Signature, Variable};
 use lang\ast\syntax\Extension;
 
 class Enums implements Extension {

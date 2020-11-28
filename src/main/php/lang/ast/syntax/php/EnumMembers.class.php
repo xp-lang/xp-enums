@@ -11,7 +11,7 @@ class EnumMembers extends Node {
   }
 
   public function add($name, $ordinal, $body) {
-    $this->members[$name]= [$ordinal, $body];
+    $this->members[$name]= [(string)$ordinal, $body];
   }
 
   public function all() { return $this->members; }

@@ -48,6 +48,23 @@ class EnumsTest extends EmittingTest {
   }
 
   #[Test]
+  public function suit_enum() {
+    $t= $this->type('enum <T> {
+      hearts, diamonds, clubs, spades;
+
+      public function color() {
+        return match ($this) {
+          self::$hearts, self::$diamonds => "red",
+          self::$clubs, self::$spades => "black",
+        };
+      }
+    }');
+
+    Assert::equals('red', Enum::valueOf($t, 'diamonds')->color());
+    Assert::equals('black', Enum::valueOf($t, 'clubs')->color());
+  }
+
+  #[Test]
   public function os_enum() {
     $t= $this->type('abstract enum <T> {
       WIN {

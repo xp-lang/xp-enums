@@ -71,6 +71,6 @@ No further action is required.
 See also
 --------
 * [RFC #0132: Enum support](https://github.com/xp-framework/rfc/issues/132) - implemented July 2007
-* [PHP RFC: Enumerations](https://wiki.php.net/rfc/enumerations) - in discussion, 2020
-* [PHP RFC: Enumerated Types](https://wiki.php.net/rfc/enum) - in draft since 2015
+* [XP Compiler feature request: PHP enums](https://github.com/xp-framework/compiler/issues/100) - open, 2021
+* [PHP RFC: Enumerations](https://wiki.php.net/rfc/enumerations) - accepted 2021, targeted for PHP 8.1
 * [Hack Built In Types: Enumerated Types](https://docs.hhvm.com/hack/built-in-types/enumerated-types)
